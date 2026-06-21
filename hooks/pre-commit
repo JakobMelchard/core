@@ -1,0 +1,13 @@
+#!/bin/bash
+set -eo pipefail
+
+ROOT=$(git rev-parse --show-toplevel)
+cd "$ROOT"
+
+if command -v gitleaks &>/dev/null; then
+  gitleaks git --pre-commit --staged 2>/dev/null
+fi
+
+make validate
+make build
+make test
