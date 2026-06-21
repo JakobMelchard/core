@@ -21,8 +21,9 @@ dev:
 
 validate:
 	cd $(ROOT)
-	[ -x scripts/validate ] && exec scripts/validate
-	[ -f wrangler.toml ] && wrangler deploy --dry-run
+	if [ -x scripts/validate ]; then scripts/validate
+	elif [ -f wrangler.toml ]; then wrangler deploy --dry-run
+	fi
 
 build:
 	cd $(ROOT)
