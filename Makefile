@@ -1,0 +1,44 @@
+.ONESHELL:
+ROOT := $(shell git rev-parse --show-toplevel 2>/dev/null || pwd)
+PROJECT_NAME := $(shell cat $(ROOT)/.pages-name 2>/dev/null)
+PORT := $(if $(wildcard $(ROOT)/.pages-name),42000,8787)
+
+.PHONY: dev validate build test deploy
+
+default: dev
+
+dev:
+	cd $(ROOT)
+	if [ -f .pages-name ]; then
+		[ -x scripts/dev ] && exec scripts/dev
+		exec wrangler pages dev . --port $(PORT) --live-reload
+	elif [ -f wrangler.toml ]; then
+		exec wrangler dev --port $(PORT)
+	else
+		echo "ERROR: create .pages-name (Pages) or wrangler.toml (Workers)" >&2
+		exit 1
+	fi
+
+validate:
+	cd $(ROOT)
+	[ -x scripts/validate ] && exec scripts/validate
+	[ -f wrangler.toml ] && wrangler deploy --dry-run
+
+build:
+	cd $(ROOT)
+	[ -x scripts/build ] && scripts/build
+
+test:
+	cd $(ROOT)
+	[ -x scripts/test ] && scripts/test
+
+deploy:
+	cd $(ROOT)
+	if [ -f .pages-name ]; then
+		wrangler pages deploy $$([ -d public ] && echo "public" || echo ".") --project-name=$$PROJECT_NAME
+	elif [ -f wrangler.toml ]; then
+		wrangler deploy
+	else
+		echo "ERROR: create .pages-name (Pages) or wrangler.toml (Workers)" >&2
+		exit 1
+	fi
