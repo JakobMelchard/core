@@ -27,11 +27,11 @@ validate:
 
 build:
 	cd $(ROOT)
-	[ -x scripts/build ] && scripts/build
+	if [ -x scripts/build ]; then scripts/build; fi
 
 test:
 	cd $(ROOT)
-	[ -x scripts/test ] && scripts/test
+	if [ -x scripts/test ]; then scripts/test; fi
 
 deploy:
 	cd $(ROOT)
