@@ -1,4 +1,5 @@
 .ONESHELL:
+MAKEFLAGS += --silent
 ROOT := $(shell git rev-parse --show-toplevel 2>/dev/null || pwd)
 PROJECT_NAME := $(shell cat $(ROOT)/.pages-name 2>/dev/null)
 PORT := $(if $(wildcard $(ROOT)/.pages-name),42000,8787)
