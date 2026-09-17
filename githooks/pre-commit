@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# consumers: git config core.hooksPath node_modules/@jakobmelchard/core/githooks
+set -euo pipefail
+command -v betterleaks >/dev/null && betterleaks git --staged --no-banner
+npx --no-install tsc
+npm test --silent

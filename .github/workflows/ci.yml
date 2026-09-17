@@ -1,0 +1,14 @@
+name: ci
+on: { push: { branches: [main] }, pull_request: {} }
+jobs:
+  self:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup-js
+        with: { browsers: 'true' }
+      - run: npx tsc && npm test && npm run e2e
+  consumers:
+    needs: self
+    uses: ./.github/workflows/consumers-e2e.yml
+    with: { core-ref: '${{ github.event.pull_request.head.sha || github.sha }}' }
