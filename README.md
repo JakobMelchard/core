@@ -3,8 +3,10 @@
 Platform for minimal htmx 4 + JSDoc apps that run as Node server, Cloudflare Worker, or in-page (Android/offline).
 
 - `src/handle.js` router `(Request, Env) → Response` · `src/transport.js` in-page htmx transport · `src/store/*` Store adapters + `runStoreContract` · `src/html.js` · `src/tags.js`
-- `.github/workflows/js-check.yml` reusable CI · `consumers-e2e.yml` runs every repo in `consumers.json` against a core sha
-- `githooks/` · `templates/hx-app/` devcontainer · `agents/skills/` promote-pattern, upgrade-core, new-hx-app, add-store-adapter
+- CI: calls the shared `JakobMelchard/.github` `node.yml`. `consumers-e2e.yml` (core-only) runs every repo in `consumers.json` against a core sha
+- Hooks: shared set from `JakobMelchard/.github`, plus `.githooks/pre-commit.local` for tsc + tests
+- `templates/hx-app/` devcontainer · `agents/skills/` promote-pattern, upgrade-core, new-hx-app, add-store-adapter
+- Types: JSDoc only; `prepare` emits `.d.ts` into `types/` (gitignored) so consumers can run `tsc --strict`. Bump the version and tag when `src/` changes — consumers pin a tag.
 - Design: `SPEC.md` · roadmap prompts: `PROMPTS.md`
 
 Status: P1, P2, core of P7/P8 done. Next: P5 (R2 store), P6 (SAF store + Capacitor).

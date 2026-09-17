@@ -89,14 +89,14 @@ core/
     transport.js          # htmx4 in-page ctx.fetch hook
   .github/
     workflows/            # on: workflow_call
-      js-check.yml        # tsc --checkJs, node --test, biome/eslint
+      ci.yml              # calls JakobMelchard/.github node.yml
       e2e-playwright.yml  # inputs: start-cmd, url
       worker-deploy.yml   # wrangler
       android-build.yml   # capacitor sync + gradle assemble, emulator tests
       consumers-e2e.yml   # matrix over consumer repos @ core PR sha  ← closes the loop
     actions/              # composite
-      setup-js/ cache-gradle/ syncthing-fixture/
-  githooks/               # existing dispatcher pattern + betterleaks; consumers: git config core.hooksPath
+      cache-gradle/ syncthing-fixture/
+  .githooks/              # pre-commit.local only; shared dispatcher lives in JakobMelchard/.github
   devcontainer/
     features/hx-app/      # node, wrangler, jdk, android sdk cmdline-tools; published to GHCR (devcontainers/action)
     templates/hx-app/
@@ -108,7 +108,7 @@ core/
   consumers.json          # [{repo, ref, e2e:"npm run e2e"}]
 ```
 
-Consumer (`lift`) contains only: `src/handlers/*.js`, `src/views/*.js`, `data/` fixtures, `e2e/`, thin workflow files calling `core/.github/workflows/*.yml@vX`, `.devcontainer/devcontainer.json` referencing the feature, `.githooks` → core, `.agents/skills` → synced from core (copy on `upgrade-core`, not symlink — agents in sandboxes don't follow external links).
+Consumer (`lift`) contains only: `src/handlers/*.js`, `src/views/*.js`, `data/` fixtures, `e2e/`, thin workflow files calling `JakobMelchard/.github/.github/workflows/node.yml@main`, `.devcontainer/devcontainer.json` referencing the feature, `.githooks` → shared hooks from `JakobMelchard/.github`, `.agents/skills` → synced from core (copy on `upgrade-core`, not symlink — agents in sandboxes don't follow external links).
 
 ## 5. Self-improving loop
 
