@@ -1,7 +1,7 @@
 # core — htmx 4 platform for Node, Workers, and in-page apps
 
-Distributed as an npm package (`@jakobmelchard/core`), consumed by the repos in
-`consumers.json`. JSDoc only, no TypeScript syntax; `tsc --checkJs` is the type gate.
+Distributed as an npm package (`@jakobmelchard/core`) that consumer apps pin by
+tag. JSDoc only, no TypeScript syntax; `tsc --checkJs` is the type gate.
 
 ## Commands
 
@@ -46,10 +46,11 @@ CHROMIUM_PATH="/Applications/Chromium.app/Contents/MacOS/Chromium" npm run e2e
 
 ## CI
 
-- `ci.yml` calls the shared `JakobMelchard/.github` `node.yml`, then `consumers-e2e.yml`.
-- `consumers-e2e.yml` checks out every repo in `consumers.json`, installs core at the
-  PR sha, runs that consumer's full suite. It cannot call the shared `node.yml`,
-  which only builds its own caller's checkout.
+- `ci.yml` calls the shared `JakobMelchard/.github` `node.yml`. That is the whole
+  gate: tsc, tests, e2e on core itself.
+- Core does not run consumer suites. Consumers pin a tag, so a core change reaches
+  them only when they bump, and their own CI runs then. A consumer matrix in core
+  would need core to know every consumer by name and to read private repos.
 - Hooks come from `JakobMelchard/.github`. `.githooks/pre-commit.local` adds tsc and
   tests locally, because a broken export reaches consumers before their CI runs.
 

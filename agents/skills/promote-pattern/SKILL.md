@@ -9,5 +9,5 @@ Criteria (all): used by ≥2 consumers OR is a Store/transport/CI seam; has test
 3. Add contract-style test (`export const run<Name>Contract`) if consumers implement an interface.
 4. `npx tsc && npm test && npm run e2e` green.
 5. Bump minor in package.json. PR body: origin consumer + commit, API, migration.
-6. CI `consumers-e2e` must be green before merge. Never merge red.
+6. CI green before merge. Never merge red.
 7. After release tag: run `upgrade-core` in every consumer; delete `_candidate` copy.
