@@ -12,7 +12,7 @@
     "./store/contract": "./src/store/contract.js",
     "./types": "./src/types.js"
   },
-  "files": ["src", ".github", "githooks", "agents", "templates"],
+  "files": ["src", "agents", "templates"],
   "scripts": {
     "check": "tsc",
     "test": "node --test \"test/*.test.js\"",

@@ -20,6 +20,8 @@ jobs:
         with: { repository: '${{ matrix.consumer.repo }}', ref: '${{ matrix.consumer.ref }}', token: '${{ secrets.CONSUMERS_TOKEN || github.token }}' }
       - uses: actions/setup-node@v4
         with: { node-version: '22' }
+      # Consumers are checked out from another repo, so this cannot call the
+      # shared node.yml — that workflow builds its own caller's checkout.
       - run: npm install && npm i --no-save "github:JakobMelchard/core#${{ inputs.core-ref }}"
       - run: npx playwright-core install --with-deps chromium
       - run: npx tsc && npm test && npm run e2e

