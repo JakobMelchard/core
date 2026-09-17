@@ -1,19 +1,49 @@
 {
   "name": "@jakobmelchard/core",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "type": "module",
   "exports": {
-    "./handle": "./src/handle.js",
-    "./html": "./src/html.js",
-    "./tags": "./src/tags.js",
-    "./transport": "./src/transport.js",
-    "./store/memory": "./src/store/memory.js",
-    "./store/fs": "./src/store/fs.js",
-    "./store/contract": "./src/store/contract.js",
-    "./types": "./src/types.js"
+    "./handle": {
+      "types": "./types/handle.d.ts",
+      "default": "./src/handle.js"
+    },
+    "./html": {
+      "types": "./types/html.d.ts",
+      "default": "./src/html.js"
+    },
+    "./tags": {
+      "types": "./types/tags.d.ts",
+      "default": "./src/tags.js"
+    },
+    "./transport": {
+      "types": "./types/transport.d.ts",
+      "default": "./src/transport.js"
+    },
+    "./store/memory": {
+      "types": "./types/store/memory.d.ts",
+      "default": "./src/store/memory.js"
+    },
+    "./store/fs": {
+      "types": "./types/store/fs.d.ts",
+      "default": "./src/store/fs.js"
+    },
+    "./store/contract": {
+      "types": "./types/store/contract.d.ts",
+      "default": "./src/store/contract.js"
+    },
+    "./types": {
+      "types": "./types/types.d.ts",
+      "default": "./src/types.js"
+    }
   },
-  "files": ["src", "agents", "templates"],
+  "files": [
+    "src",
+    "types",
+    "agents",
+    "templates"
+  ],
   "scripts": {
+    "prepare": "tsc -p tsconfig.build.json",
     "check": "tsc",
     "test": "node --test \"test/*.test.js\"",
     "e2e": "node --test \"test/e2e/*.test.js\""
