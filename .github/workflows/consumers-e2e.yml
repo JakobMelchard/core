@@ -24,4 +24,4 @@ jobs:
       # shared node.yml — that workflow builds its own caller's checkout.
       - run: npm install && npm i --no-save "github:JakobMelchard/core#${{ inputs.core-ref }}"
       - run: npx playwright-core install --with-deps chromium
-      - run: npx tsc && npm test && npm run e2e
+      - run: npx tsc && npm test && ${{ matrix.consumer.e2e }}
