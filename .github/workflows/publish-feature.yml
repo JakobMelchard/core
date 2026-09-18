@@ -1,0 +1,20 @@
+name: publish-feature
+on:
+  push:
+    tags: ['v*']
+    paths: ['devcontainer/features/**']
+permissions:
+  packages: write
+  contents: read
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: devcontainers/action@v1
+        with:
+          publish-features: true
+          base-path-to-features: devcontainer/features
+          generate-docs: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

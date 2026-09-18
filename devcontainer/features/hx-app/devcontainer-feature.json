@@ -1,0 +1,13 @@
+{
+  "name": "hx-app",
+  "id": "hx-app",
+  "version": "1.0.0",
+  "description": "Installs wrangler and Playwright Chromium for htmx+JSDoc consumer apps on JakobMelchard/core. JDK 21 is expected via ghcr.io/devcontainers/features/java:1.",
+  "options": {
+    "android": {
+      "type": "boolean",
+      "default": false,
+      "description": "Install Android cmdline-tools (requires ANDROID_HOME; adds ~200 MB)"
+    }
+  }
+}

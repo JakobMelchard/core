@@ -1,0 +1,17 @@
+{
+  "type": "module",
+  "dependencies": {
+    "@jakobmelchard/core": "github:JakobMelchard/core#main"
+  },
+  "devDependencies": {
+    "@types/node": "^22",
+    "playwright-core": "^1",
+    "typescript": "^5"
+  },
+  "scripts": {
+    "start": "node serve.js",
+    "check": "tsc",
+    "test": "node --test \"test/*.test.js\"",
+    "e2e": "node --test \"e2e/flow.test.js\""
+  }
+}
