@@ -1,0 +1,10 @@
+{
+  "name": "hx-app",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:22",
+  "features": {
+    "ghcr.io/jakobmelchard/core/hx-app:latest": {},
+    "ghcr.io/devcontainers/features/java:1": { "version": "21" }
+  },
+  "postCreateCommand": "npm ci && git config core.hooksPath node_modules/@jakobmelchard/core/githooks",
+  "customizations": { "codespaces": { "openFiles": ["SPEC.md"] } }
+}

@@ -1,0 +1,13 @@
+name: ci
+on: { push: { branches: [main] }, pull_request: {} }
+jobs:
+  node:
+    uses: JakobMelchard/.github/.github/workflows/node.yml@main
+    with:
+      install-cmd: npm install
+      lint-cmd: ""
+      check-cmd: npx tsc
+      test-cmd: npm test
+  e2e:
+    uses: JakobMelchard/core/.github/workflows/e2e-playwright.yml@main
+    secrets: inherit
